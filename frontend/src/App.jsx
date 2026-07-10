@@ -164,7 +164,7 @@ export default function App() {
       <footer className="app__footer">
         Rodando 100% local via Ollama · código-fonte no{' '}
         <a
-          href="https://github.com/"
+          href="https://github.com/Fernando-1909"
           target="_blank"
           rel="noreferrer"
         >
