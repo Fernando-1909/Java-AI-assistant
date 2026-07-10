@@ -19,6 +19,7 @@ export default function App() {
   const [isWaiting, setIsWaiting] = useState(false)
   const [status, setStatus] = useState('checking')
   const scrollRef = useRef(null)
+  const assistantMessageId = useRef(null) // Para controlar qual mensagem atualizar
 
   useEffect(() => {
     checkHealth()
@@ -42,24 +43,41 @@ export default function App() {
   }
 
   async function handleSend(text) {
-    const userMessage = { role: 'user', content: text }
-    const history = messages.filter((m) => m !== WELCOME_MESSAGE)
+    const userMessage = { role: 'user', content: text, id: Date.now() }
+    const history = messages
+      .filter((m) => m.content !== WELCOME_MESSAGE.content)
+      .map(({ role, content }) => ({ role, content }))
 
+    // Adiciona a mensagem do usuário
     setMessages((prev) => [...prev, userMessage])
     setIsWaiting(true)
 
     let assistantContent = ''
-    let appended = false
+    const newAssistantId = Date.now() + 1 // ID único para a mensagem do assistente
 
     const appendOrUpdate = (content, isError = false) => {
       setMessages((prev) => {
-        if (!appended) {
-          appended = true
-          return [...prev, { role: 'assistant', content, error: isError }]
+        // Procura se já existe uma mensagem do assistente com este ID
+        const existingIndex = prev.findIndex(m => m.id === newAssistantId)
+        
+        if (existingIndex === -1) {
+          // Primeira vez: adiciona nova mensagem do assistente
+          return [...prev, { 
+            role: 'assistant', 
+            content, 
+            error: isError, 
+            id: newAssistantId 
+          }]
+        } else {
+          // Atualiza a mensagem existente do assistente
+          const next = [...prev]
+          next[existingIndex] = { 
+            ...next[existingIndex], 
+            content, 
+            error: isError 
+          }
+          return next
         }
-        const next = [...prev]
-        next[next.length - 1] = { role: 'assistant', content, error: isError }
-        return next
       })
       setIsWaiting(false)
     }
@@ -121,9 +139,9 @@ export default function App() {
         </header>
 
         <main className="terminal__body" ref={scrollRef}>
-          {messages.map((msg, index) => (
+          {messages.map((msg) => (
             <MessageBubble
-              key={index}
+              key={msg.id || Math.random()}
               role={msg.role}
               content={msg.content}
               error={msg.error}
