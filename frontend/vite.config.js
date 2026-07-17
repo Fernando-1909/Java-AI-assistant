@@ -1,9 +1,10 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-// base: './' garante que os assets funcionem tanto localmente quanto
-// hospedados em um subdiretório (ex: GitHub Pages: usuario.github.io/repo)
+// base aponta para o subcaminho do GitHub Pages (usuario.github.io/repo/).
+// Se um dia trocar de repositório ou hospedar na raiz de um domínio, ajuste
+// para '/' ou './'.
 export default defineConfig({
   plugins: [react()],
-  base: './',
+  base: '/Java-AI-assistant/',
 })
