@@ -1,4 +1,4 @@
-# ☕ Java Assistant
+# Java Assistant
 
 Assistente de IA especializado em tirar dúvidas sobre a linguagem **Java**,
 rodando **100% localmente** através do [Ollama](https://ollama.com), com uma
@@ -8,7 +8,7 @@ interface de chat em React inspirada em um terminal de desenvolvedor.
 
 ---
 
-## ✨ Sobre o projeto
+## Sobre o projeto
 
 Em vez de depender de uma API paga de LLM, este projeto roda o modelo de
 linguagem **na própria máquina** através do Ollama. O backend em Python só
@@ -37,7 +37,7 @@ ou Vercel.
                                 └──────────────────────────┘
 ```
 
-## 🧱 Stack
+## Stack
 
 | Camada    | Tecnologia                              |
 |-----------|------------------------------------------|
@@ -46,7 +46,7 @@ ou Vercel.
 | Frontend  | React 18, Vite, CSS puro (sem framework) |
 | Deploy    | GitHub Pages/Vercel (frontend) + Cloudflare Tunnel/ngrok (backend) |
 
-## 📂 Estrutura
+## Estrutura
 
 ```
 java-ai-assistant/
@@ -66,7 +66,7 @@ java-ai-assistant/
 └── README.md
 ```
 
-## 🚀 Rodando localmente
+## Rodando localmente
 
 ### Pré-requisitos
 
@@ -107,7 +107,7 @@ npm run dev
 
 Acesse `http://localhost:5173`.
 
-## 🌐 Publicando para acesso via web
+## Publicando para acesso via web
 
 O modelo roda na sua máquina, então "publicar" aqui significa expor seu
 backend local com uma URL pública e hospedar o frontend estático de graça.
@@ -146,17 +146,14 @@ npm run build
 **Vercel:** conecte o repositório, defina o diretório raiz como `frontend`
 e a variável de ambiente `VITE_API_URL` no painel do projeto.
 
-> ⚠️ O túnel e o backend só existem enquanto sua máquina estiver ligada e
+> O túnel e o backend só existem enquanto sua máquina estiver ligada e
 > rodando `ollama serve` + `uvicorn`. Para um portfólio, isso costuma ser
 > perfeitamente aceitável — liga a demo quando for mostrar, ou grava um
 > vídeo/gif do uso para deixar fixo no README.
 
-## 🔒 Notas
+## Notas
 
 - Nenhuma chave de API é necessária — tudo roda local via Ollama.
 - O CORS do backend só libera as origens listadas em `ALLOWED_ORIGINS`.
 - O system prompt mantém o assistente restrito ao tema Java.
 
-## 📄 Licença
-
-MIT — sinta-se à vontade para usar este projeto como base para o seu portfólio.
